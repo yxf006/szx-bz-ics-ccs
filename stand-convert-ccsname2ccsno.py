@@ -27,7 +27,7 @@ if __name__ == '__main__':
         dict_ics2ccs[row['icsclassno']]=row['ccsclassno']
 
     #cur.execute("SELECT id,CCSNo,ICSNo FROM zszx_standards")
-    cur.execute("SELECT id,Title,StdNo,CCSNo,ICSNo FROM zszx_standards_copy limit 100 ")
+    cur.execute("SELECT id,Title,StdNo,CCSNo,ICSNo FROM zszx_standards ")
     i=1
     content=''
     updaterownum=1
@@ -87,6 +87,7 @@ if __name__ == '__main__':
         repCCSNo=''
         if (init_ccsno!='' or init_ccsno!=None):
             for ccsno in CCSNolist:
+                repCCSNotemp=''
                 #纯中文字符串
                 m=re.match(r"^[^A-Za-z0-9].*\D$",ccsno)
                 if(m):
@@ -96,11 +97,20 @@ if __name__ == '__main__':
                     except:
                         repCCSNotemp='CCSNoKeyError'
                         pass
-                #代码和中文混合
+                #代码和中文混合:ccsnoxxx
                 m=re.match(r"(^[A-Z][A-Z0-9/]*)([^A-Za-z0-9]*)",ccsno)
                 if(m):
                     try:
                         repCCSNotemp=m.group(1)
+                        pass
+                    except:
+                        repCCSNotemp='CCSNoGroupOneKeyError'
+                        pass
+                #代码和中文混合:xxx(ccsno)
+                m=re.match(r"(^[^A-Za-z0-9]*)(\()([A-Za-z0-9]*)(\)$)",ccsno)
+                if(m):
+                    try:
+                        repCCSNotemp=m.group(3)
                         pass
                     except:
                         repCCSNotemp='CCSNoGroupOneKeyError'

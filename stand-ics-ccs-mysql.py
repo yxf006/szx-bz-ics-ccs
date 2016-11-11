@@ -27,7 +27,7 @@ if __name__ == '__main__':
         dict_ics2ccs[row['icsclassno']]=row['ccsclassno']
 
     #cur.execute("SELECT id,CCSNo,ICSNo FROM zszx_standards")
-    cur.execute("SELECT id,Title,StdNo,CCSNo,ICSNo FROM zszx_standards_copy ")
+    cur.execute("SELECT id,Title,StdNo,CCSNo,ICSNo FROM zszx_standards_copy2 ")
     i=1
     content=''
     addfillrownum=1
@@ -37,7 +37,7 @@ if __name__ == '__main__':
             ics为空：不处理
             ics不为空，根据icsno找到ccsno，填充CCSNo的代码
         2：规范ccsno的原始中文值为代码
-        3：校验icsno的数据规范有效性
+        
     '''
     for row in cur.fetchall():
         #print(row)

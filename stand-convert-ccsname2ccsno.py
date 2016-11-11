@@ -134,8 +134,8 @@ if __name__ == '__main__':
                     f.write(addtofilllog)
                 except Exception:
                     pass
-            #cur2.execute(sql)
-            #conn.commit()
+            cur2.execute(sql)
+            conn.commit()
             updaterownum+=1
 
         i+=1

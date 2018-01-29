@@ -36,9 +36,13 @@ if __name__ == '__main__':
     doloop=True
     '''
         目标：
+        不规范样例：
+        13.120 - Domestic safety37.060.10 - Motion picture equipment97.180 - Miscellaneous domestic and commercial equipment 
+        13.120 - Domestic safety97.180 - Miscellaneous domestic and commercial equipment 
         1：根据ICSClassification不规范字段（包含‘-’字符），处理为规范字段，填充到icsno
             ics是否包含‘-’
-            利用正则判断，然后替换不规范内容为空
+            利用正则判断，然后在分类号前面加个；号
+        2:需要递归处理多个不规范分类的情况
     '''
 
     while doloop:
@@ -88,87 +92,6 @@ if __name__ == '__main__':
                     conn.commit()
                     updaterownum += 1
 
-
-
-            # if (m):
-            #     init_ccsno = init_ccsno[0:len(init_ccsno) - 1]
-            #
-            # m=re.match(r'.*;$',init_ccsno)
-            # if(m):
-            #     init_ccsno=init_ccsno[0:len(init_ccsno)-1]
-            #
-            # m=re.match(r'.*;$',init_icsno)
-            # if(m):
-            #     init_icsno=init_icsno[0:len(init_icsno)-1]
-            #
-            #
-            # CCSNolist=init_ccsno.split(';')
-            # ICSNolist=init_icsno.split(';')
-            #
-            # repCCSNo=''
-            # repICSNo=''
-            #
-            # for ccsno in CCSNolist:
-            #     try:
-            #         repCCSNo+=ccsnodict[ccsno]+';'
-            #     except:
-            #         repCCSNo+='KeyError;'
-            # repCCSNo=repCCSNo[0:len(repCCSNo)-1]
-            #
-            # for iscno in ICSNolist:
-            #     try:
-            #         repICSNo+=icsnodict[icsno]+';'
-            #     except:
-            #         repICSNo+='KeyError;'
-            # repICSNo=repICSNo[0:len(repICSNo)-1]
-            #
-            '''
-            处理数据
-            '''
-            # repCCSNo=''
-            # if (init_ccsno!='' or init_ccsno!=None):
-            #     for ccsno in CCSNolist:
-            #         repCCSNotemp=''
-            #         #纯中文字符串
-            #         m=re.match(r"^[^A-Za-z0-9].*\D$",ccsno)
-            #         if(m):
-            #             try:
-            #                 repCCSNotemp=ccsnodict[ccsno]
-            #                 pass
-            #             except:
-            #                 repCCSNotemp='CCSNoKeyError'
-            #                 pass
-            #         #代码和中文混合:ccsnoxxx
-            #         m=re.match(r"(^[A-Z][A-Z0-9/]*)([^A-Za-z0-9]*)",ccsno)
-            #         if(m):
-            #             try:
-            #                 repCCSNotemp=m.group(1)
-            #                 pass
-            #             except:
-            #                 repCCSNotemp='CCSNoGroupOneKeyError'
-            #                 pass
-            #         #代码和中文混合:xxx(ccsno)
-            #         m=re.match(r"(^[^A-Za-z0-9]*)(\()([A-Za-z0-9]*)(\)$)",ccsno)
-            #         if(m):
-            #             try:
-            #                 repCCSNotemp=m.group(3)
-            #                 pass
-            #             except:
-            #                 repCCSNotemp='CCSNoGroupOneKeyError'
-            #                 pass
-            #         #规范代码格式
-            #         m=re.match(r"^[A-Z][A-Z0-9/]*\d$",ccsno)
-            #         if(m):
-            #             repCCSNotemp=ccsno
-            #             pass
-            #
-            #         repCCSNo+=repCCSNotemp+';'
-            #     repCCSNo=repCCSNo[0:len(repCCSNo)-1]
-            #
-            #
-
-            # #
-            # i+=1
         print(count)
         if count==0:
             doloop=False

@@ -22,7 +22,7 @@ if __name__ == '__main__':
     doloop=True
     '''
         目标：
-        1：根据ICSClassification不规范字段（包含‘-’字符），处理为规范字段，填充到icsno
+        1：将已经加好分号的icsno字段（包含‘-’字符），替换英文为空
             ics是否包含‘-’
             利用正则判断，然后替换不规范内容为空
     '''
@@ -49,8 +49,8 @@ if __name__ == '__main__':
             # print(init_icsno)
             if (init_icsno != '' or init_icsno != None):
                 # m = re.match(r'(.*)(\s-\s.*;)(.*)', init_icsno)
-                s1=re.sub('\s-\s[^-]*;', ';', init_icsno)
-                s2=re.sub('\s-\s.*','',s1)
+                s1=re.sub('\s-\s[^-]*;', ';', init_icsno)   #处理开头和中间带分号结尾的情况 13.120 - Domestic safety;37.060.10 - Motion picture equipment;
+                s2=re.sub('\s-\s.*','',s1)  #处理结尾没有分号的情况
                 repICSNo=s2
                 # m = re.match(r'.*\s-\s.*', init_icsno)
                 # m = re.match(r'(.*[a-zA-Z])([\d.]+\s-\s.*)', init_icsno)

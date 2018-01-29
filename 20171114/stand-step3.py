@@ -36,6 +36,8 @@ if __name__ == '__main__':
             ics为空：不处理
             ics不为空，根据icsno找到ccsno，填充CCSNo的代码
         2：规范ccsno的原始中文值为代码
+        3：这里主要参考2016年的代码，2017年不需要处理ccsno，可注释
+        4：日志保留，但是没有参考。数据较为简单，主要根据处理后数据直接校验了。
         
     '''
     for row in cur.fetchall():
